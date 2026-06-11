@@ -1,0 +1,115 @@
+.posting-wrap {
+  background: #f6f6f6;
+  min-height: calc(100vh - 90px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.posting-box {
+  width: 1000px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.posting-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+.posting-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.share {
+  font-family: "MemomentKkukkukk", sans-serif;
+  position: absolute;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.posting-body {
+  display: flex;
+  height: 580px;
+}
+
+.posting-photo {
+  width: 55%;
+  background: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 14px;
+  border-right: 1px solid #ccc;
+}
+
+.posting-right {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.posting-content {
+  flex: 1;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.posting-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.posting-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #c9e8f5;
+}
+
+.posting-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.posting-txt {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  width: 100%;
+  font-size: 14px;
+  color: #555;
+  font-family: Arial, sans-serif;
+}
+
+.posting-tags {
+  padding: 16px 20px;
+  min-height: 120px;
+}
+
+.posting-tags input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: #555;
+  font-family: Arial, sans-serif;
+}
