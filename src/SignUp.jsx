@@ -13,13 +13,14 @@ export default function SignUp() {
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
-      options: {
-        name: name,
-      },
     });
 
     if (data) {
       alert("회원가입을 완료했습니다!");
+      const userId = data.user.id;
+      const { data1, error1 } = await supabase
+        .from("profiles")
+        .upsert({ id: userId, nickname: name });
       navigate("/");
     }
 

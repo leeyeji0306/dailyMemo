@@ -19,8 +19,10 @@ export default function SignIn() {
       console.error(error);
     }
 
-    if (data?.user) {
+    if (data) {
       alert("로그인을 완료했습니다!");
+      const userId = data.user.id;
+
       setEmail("");
       setPassword("");
     }
