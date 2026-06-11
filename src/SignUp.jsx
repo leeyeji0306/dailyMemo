@@ -10,23 +10,24 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   async function clickSignUpButton() {
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
+    const { data: signUpeData, error: signUpError } =
+      await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
 
-    if (data) {
+    if (signUpeData) {
       alert("회원가입을 완료했습니다!");
-      const userId = data.user.id;
-      const { data1, error1 } = await supabase
+      const userId = signUpeData.user.id;
+      const { data: profileData, error: profileError } = await supabase
         .from("profiles")
         .upsert({ id: userId, nickname: name });
       navigate("/");
     }
 
-    if (error) {
+    if (signUpError) {
       alert("회원가입에 실패하였습니다.");
-      console.error(error);
+      console.error(signUpError);
     }
 
     setName("");

@@ -21,7 +21,6 @@ export default function SignIn() {
 
     if (data) {
       alert("로그인을 완료했습니다!");
-      const userId = data.user.id;
 
       setEmail("");
       setPassword("");
