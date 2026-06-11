@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* 공통 */
+.left,
+.right {
+  width: 50%;
+  position: relative;
+}
+
+/* 로그인 폼 */
+.form-area {
+  width: 430px;
+  margin-left: 108px;
+  margin-top: 135px;
+}
+
+.form-area h1 {
+  font-size: 68px;
+  font-weight: 400;
+  margin-bottom: 38px;
+}
+
+.form-area label {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.form-area input[type="text"],
+.form-area input[type="email"],
+.form-area input[type="password"] {
+  width: 430px;
+  height: 60px;
+  border: 1px solid #cfcfcf;
+  border-radius: 14px;
+  background: transparent;
+  margin-bottom: 34px;
+  padding: 0 15px;
+}
+
+.main-btn {
+  width: 430px;
+  height: 58px;
+  border: none;
+  border-radius: 12px;
+  background: #fff3a4;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* 페이지 이동 */
+.switch-page {
+  width: 430px;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.switch-page a {
+  color: #4f64ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.switch-page a:hover {
+  text-decoration: underline;
+}
+
+/* 플래너 */
+.planner {
+  background: #fff3a4;
+  border-top-left-radius: 38px;
+  border-bottom-left-radius: 38px;
+}
+
+.signup-planner {
+  background: #fff3a4;
+  border-top-right-radius: 38px;
+  border-bottom-right-radius: 38px;
+}
+
+.planner-line {
+  position: absolute;
+  width: 54px;
+  height: 100%;
+  background: #ffe293;
+}
+
+.planner .planner-line {
+  left: 118px;
+}
+
+.right-line {
+  right: 118px;
+}
+
+.planner-title {
+  position: absolute;
+  top: 100px;
+}
+
+.planner .planner-title {
+  left: 275px;
+}
+
+.signup-title {
+  position: absolute;
+  top: 120px;
+  left: 170px;
+}
+
+.planner-title h2 {
+  font-size: 64px;
+  font-weight: 500;
+}
+
+.planner-title p {
+  font-size: 40px;
+  margin-top: 6px;
+}
+
+.signup-form {
+  margin-left: 120px;
+  margin-top: 135px;
+}
