@@ -1,10 +1,8 @@
-import React from "react";
 import "./Posting.css"; // 게시물 작성 화면 전용 스타일 로드
 
-const Posting = () => {
+const Posting = ({ userName }) => {
   return (
     <div>
-      {/* 헤더 중복을 막기 위해 내부에 있던 <Header />는 제거했습니다 */}
       <main>
         <div className="posting-wrap">
           <div className="posting-box">
@@ -22,7 +20,7 @@ const Posting = () => {
                       className="posting-avatar"
                       alt="Avatar"
                     />
-                    <span className="posting-name">000</span>
+                    <span className="posting-name">{userName}</span>
                   </div>
                   <textarea
                     className="posting-text"

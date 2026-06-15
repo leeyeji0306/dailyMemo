@@ -1,26 +1,25 @@
-import { useState } from "react";
 import Header from "./Header";
 import Home from "./Home";
 import Explore from "./Explore";
 import Posting from "./Posting";
+import Detail from "./Detail.jsx";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 export default function App() {
-  // 현재 어떤 페이지를 보여줄지 결정하는 상태값입니다.
-  const [page, setPage] = useState("Home");
-
+  let userName = "이예지";
   return (
     <>
-      {/* 헤더는 이곳에서 단 한 번만 렌더링하여 고정시킵니다 */}
-      <Header page={page} setPage={setPage} />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/explore" element={<Explore />}></Route>
-          <Route path="/posting" element={<Posting />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/explore" element={<Explore />}></Route>
+        <Route
+          path="/posting"
+          element={<Posting userName={userName} />}
+        ></Route>
+        <Route path="/detail/:id" element={<Detail />} />
+      </Routes>
     </>
   );
 }
