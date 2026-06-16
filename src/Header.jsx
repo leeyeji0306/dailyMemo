@@ -1,43 +1,49 @@
 import "./Header.css"; // 헤더 전용 스타일 로드
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
+
+  // 💡 메뉴 바(드롭다운)와 모달창의 열림/닫힘 상태 관리
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (location.pathname === "/" || location.pathname === "/SignUp") {
+    return null;
+  }
+
+  // 💡 로그아웃 '네' 버튼을 눌렀을 때 실행될 함수
+  const handleLogoutConfirm = () => {
+
+    alert("로그아웃 되었습니다.");
+    setIsModalOpen(false); // 모달 닫기
+    setIsMenuOpen(false); // 메뉴 바 닫기
+    localStorage.clear();
+    navigate("/"); // 로그인 페이지로 이동
+  };
+
   return (
     <>
       <header>
-        <Link
-          to="/"
-          className="logo"
-          onClick={() => {
-            location("/");
-          }}
-          style={{ cursor: "pointer" }}
-        >
-          <div>Daily Memo</div>
+        {/* 로고 영역 */}
+        <Link to="/home" style={{ cursor: "pointer" }}>
+          <div className="logo">Daily Memo</div>
         </Link>
+
         <nav>
           <Link
-            to="/"
-            style={{
-              cursor: "pointer",
-              fontWeight: currentPath === "/" ? "bold" : "normal",
-            }}
-            onClick={() => {
-              location("/");
-            }}
+            to="/home"
+            style={{ fontWeight: currentPath === "/home" ? "bold" : "normal" }}
           >
             <div>Home</div>
           </Link>
           <Link
             to="/explore"
             style={{
-              cursor: "pointer",
               fontWeight: currentPath === "/explore" ? "bold" : "normal",
-            }}
-            onClick={() => {
-              location("/explore");
             }}
           >
             <div>Explore</div>
@@ -45,21 +51,67 @@ const Header = () => {
           <Link
             to="/posting"
             style={{
-              cursor: "pointer",
               fontWeight: currentPath === "/posting" ? "bold" : "normal",
-            }}
-            onClick={() => {
-              location("/explore");
             }}
           >
             <div>Posting</div>
           </Link>
+
           <div className="search-box">
             <input type="text" placeholder="Search in site" />
           </div>
-          <img src="src/assets/프로필.png" className="profile" alt="Profile" />
+
+          {/* 💡 프로필 영역 (클릭하면 토글 메뉴 바가 나옵니다) */}
+          <div className="profile-wrapper">
+            <img
+              src="src/assets/프로필.png"
+              className="profile"
+              alt="Profile"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+
+            {/* 프로필 드롭다운 메뉴 바 */}
+            {isMenuOpen && (
+              <div className="profile-dropdown">
+                <div className="dropdown-item user-info-header">
+                  <strong>이예지</strong>님
+                </div>
+                <hr className="dropdown-divider" />
+                <button
+                  className="dropdown-item logout-btn"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  로그아웃
+                </button>
+              </div>
+            )}
+          </div>
         </nav>
       </header>
+
+      {/* 💡 로그아웃 확인 모달창 */}
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="logout-modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Log Out</h3>
+            <p>Are you sure you want to log out?</p>
+            <div className="modal-actions">
+              <button
+                className="modal-btn cancel"
+                onClick={() => setIsModalOpen(false)}
+              >
+                No
+              </button>
+              <button
+                className="modal-btn confirm"
+                onClick={handleLogoutConfirm}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

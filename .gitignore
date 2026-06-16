@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+# 환경 변수 파일 숨기기
+.env
+.env.local
+.env.*.local
 
 # 환경 변수 파일 숨기기
 .env

@@ -15,7 +15,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start !important;
-  margin: auto 0;
+  margin: 0 auto;
 }
 
 /* 2. 카드 한 장의 크기 */
@@ -25,7 +25,6 @@ main {
   border-radius: 12px;
   overflow: hidden;
   background: #ffffff;
-  margin-bottom: 30px; /* 가로 정렬을 위해 margin: 0 auto 대신 아래 여백만 남김 */
 }
 
 /* 3. 카드 안의 이미지 영역 크기 */

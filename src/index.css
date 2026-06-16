@@ -1,0 +1,20 @@
+html,
+body {
+  height: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important; /* 💡 세로 스크롤바를 무조건 활성화 */
+}
+
+#root {
+  height: auto !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: visible !important; /* 💡 자식 요소들이 넘쳐나도 다 보여주도록 설정 */
+}
+
+main {
+  flex: 1;
+  height: auto !important;
+  overflow: visible !important;
+}

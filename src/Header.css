@@ -23,7 +23,7 @@ header {
   font-size: 30px;
   font-weight: bold;
   margin-right: auto;
-  font-family: "MemomentKkukkukk", sans-serif;
+  font-family: "MemomentKkukkukk";
 }
 
 nav {
@@ -72,4 +72,167 @@ button,
 input {
   border: none;
   outline: none;
+}
+
+/* 프로필을 감싸는 wrapper (드롭다운의 기준점이 됨) */
+.profile-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.profile {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.profile:hover {
+  transform: scale(1.05);
+}
+
+/* 팝업 드롭다운 메뉴 바 디자인 */
+.profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 140px;
+  padding: 6px 0;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #333333;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.user-info-header {
+  font-size: 13px;
+  color: #666666;
+  cursor: default;
+}
+
+.user-info-header:hover {
+  background-color: transparent;
+}
+
+.dropdown-divider {
+  border: 0;
+  height: 1px;
+  background: #ebebeb;
+  margin: 4px 0;
+}
+
+.logout-btn {
+  color: #ff4d4f; /* 로그아웃은 경고색인 레드 톤 */
+}
+
+/* 모달 뒷배경 흐리게 처리 (오버레이) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); /* 반투명 블랙 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* 로그아웃 모달창 바디 */
+.logout-modal {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  width: 360px;
+  animation: modalScaleUp 0.2s ease-out;
+}
+
+.logout-modal h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #111111;
+}
+
+.logout-modal p {
+  font-size: 15px;
+  color: #666666;
+  margin-bottom: 26px;
+}
+
+/* 모달 버튼 그룹 */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.modal-btn {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  width: 110px;
+  transition: background 0.2s;
+}
+
+.modal-btn.cancel {
+  background-color: #f0f0f0;
+  color: #333333;
+}
+
+.modal-btn.cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.modal-btn.confirm {
+  background-color: #ffd880; /* 플래너 디자인에 맞춘 시그니처 옐로우/골드 계열 */
+  color: #111111;
+}
+
+.modal-btn.confirm:hover {
+  background-color: #fcc756;
+}
+
+/* 애니메이션 효과들 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
