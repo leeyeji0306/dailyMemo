@@ -15,7 +15,7 @@ const Detail = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const user_id = user.id;
-
+  const isOwner = postData?.user_id === user_id;
   const post = postData
     ? {
         id: postData.id,
@@ -104,11 +104,15 @@ const Detail = () => {
         <p className="post-content">{post.content}</p>
 
         {/* 수정 / 삭제 버튼 메뉴 */}
-        <div className="post-actions">
-          <button className="action-btn edit-btn" onClick={editButtonClick}>
-            수정
-          </button>
-        </div>
+        {isOwner ? (
+          <div className="post-actions">
+            <button className="action-btn edit-btn" onClick={editButtonClick}>
+              수정
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </section>
     </main>
   );

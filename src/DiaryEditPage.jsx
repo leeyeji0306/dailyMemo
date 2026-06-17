@@ -18,7 +18,6 @@ export default function DiaryEditPage() {
 
   // 💡 [수정/삭제 권한 체크 판별기]
   // 글에 적힌 user_id와 내 로그인 ID가 일치하면 진짜 주인(isOwner = true)
-  const isOwner = passedPost?.user_id === userId;
 
   // 초기 상태 설정
   const [content, setContent] = useState(passedPost?.content || "");
@@ -232,14 +231,9 @@ export default function DiaryEditPage() {
                 {isOwner ? "게시물 수정하기" : "게시물 상세보기"}
               </span>
 
-              {/* 💡 내가 쓴 글일 때만 우측 상단에 '수정하기' 버튼이 작동함 (남의 글이면 안내 메시지) */}
               <button
                 className="share"
-                onClick={
-                  isOwner
-                    ? handleSave
-                    : () => alert("본인 글만 수정할 수 있습니다.")
-                }
+                onClick={handleSave}
                 style={{ opacity: isOwner ? 1 : 0.5 }}
               >
                 수정하기
