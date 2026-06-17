@@ -1,0 +1,153 @@
+.posting-wrap {
+  min-height: calc(100vh - 90px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.posting-box {
+  width: 1000px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.posting-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.posting-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.share {
+  font-family: "MemomentKkukkukk", sans-serif;
+  position: absolute;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.posting-body {
+  display: flex;
+  height: 580px;
+}
+
+/* ✅ file input 완전히 숨기기 */
+#file-input {
+  display: none;
+}
+
+/* ✅ 사진 영역 — 이미지 없을 때 placeholder */
+.posting-photo {
+  width: 55%;
+  background: #d9d9d9;
+  border-right: 1px solid #ccc;
+  position: relative; /* 자식 요소 절대 위치 기준 */
+  overflow: hidden;
+}
+
+/* ✅ 업로드 전: 클릭 유도 placeholder가 영역 전체를 채움 */
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  color: #aaa;
+  gap: 8px;
+}
+
+.upload-placeholder span {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.upload-placeholder p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ✅ 업로드 후: 이미지가 영역을 꽉 채움 */
+.posting-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer; /* 클릭해서 재선택 가능 */
+}
+
+.posting-right {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.posting-content {
+  flex: 1;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.posting-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.posting-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #c9e8f5;
+  flex-shrink: 0;
+}
+
+.posting-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ✅ 클래스명 오타 수정: posting-txt → posting-text */
+.posting-text {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  width: 100%;
+  font-size: 14px;
+  color: #555;
+  font-family: Arial, sans-serif;
+}
+
+.posting-tags {
+  padding: 16px 20px;
+  min-height: 120px;
+}
+
+.posting-tags input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: #555;
+  font-family: Arial, sans-serif;
+}

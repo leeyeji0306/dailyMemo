@@ -61,6 +61,7 @@ const Explore = () => {
             : [];
           tempPosts.push({
             id: post.id,
+            user_id: post.profiles.id,
             nickname: nickname,
             photo_url: post.photo_url,
             content: post.content,

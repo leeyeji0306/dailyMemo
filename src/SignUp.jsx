@@ -34,18 +34,21 @@ export default function SignUp() {
     setEmail("");
     setPassword("");
   }
+
   return (
     <>
-      <div className="container">
+      {/* 💡 여기 클래스명을 container에서 signin-container로 수정 완료! */}
+      <div className="signin-container">
+        {/* 왼쪽: 노란색 다이어리 디자인 구역 */}
         <div className="left signup-planner">
           <div className="planner-line right-line"></div>
-
           <div className="planner-title signup-title">
             <h2>PLANNER</h2>
             <p>Daily Memo</p>
           </div>
         </div>
 
+        {/* 오른쪽: 하얀색 회원가입 폼 구역 */}
         <div className="right">
           <div className="form-area signup-form">
             <h1>Sign up</h1>
@@ -85,8 +88,7 @@ export default function SignUp() {
             </button>
 
             <div className="switch-page">
-              Already have an account?
-              <Link to="/">Login</Link>
+              Already have an account? <Link to="/">Login</Link>
             </div>
           </div>
         </div>

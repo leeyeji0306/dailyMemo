@@ -5,6 +5,7 @@ import Posting from "./Posting";
 import Detail from "./Detail.jsx";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import DiaryEditPage from "./DiaryEditPage.jsx";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
@@ -23,6 +24,7 @@ export default function App() {
           element={<Posting userName={userName} />}
         ></Route>
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/edit/:id" element={<DiaryEditPage />} />
       </Routes>
     </>
   );

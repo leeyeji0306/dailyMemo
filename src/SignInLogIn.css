@@ -17,10 +17,11 @@ body {
   height: 100vh;
 }
 
-/* 공통 */
+/* 공통 부분을 요렇게 수정해주면 높이가 꽉 찹니다 */
 .left,
 .right {
   width: 50%;
+  height: 100vh; /* 👈 화면 전체 높이 채우기 추가 */
   position: relative;
 }
 
@@ -138,6 +139,5 @@ body {
 }
 
 .signup-form {
-  margin-left: 120px;
-  margin-top: 135px;
+  margin: 0 auto;
 }

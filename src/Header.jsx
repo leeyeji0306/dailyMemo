@@ -6,16 +6,21 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const currentPath = location.pathname;
-  const user = JSON.parse(localStorage.getItem("user"));
-  const user_name = user.name;
 
   // 💡 메뉴 바(드롭다운)와 모달창의 열림/닫힘 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (location.pathname === "/" || location.pathname === "/SignUp") {
+  // 💡 헤더를 숨기고 싶은 페이지들의 경로(Path)를 배열로 등록!
+  const excludePaths = ["/", "/SignUp"];
+
+  // 현재 주소가 배열에 포함되어 있다면, 아무것도 렌더링하지 않음(null)
+  if (excludePaths.includes(location.pathname)) {
     return null;
   }
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const user_name = user.name;
 
   // 💡 로그아웃 '네' 버튼을 눌렀을 때 실행될 함수
   const handleLogoutConfirm = () => {

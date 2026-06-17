@@ -1,6 +1,7 @@
 import "./Detail.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import defaultProfile from "/src/assets/프로필.png";
+import { supabase } from "./supabase";
 
 const Detail = () => {
   // useParams로 주소창의 id를 가져옵니다 (예: /detail/3 이면 id는 "3")
@@ -10,10 +11,16 @@ const Detail = () => {
 
   const { postData } = location.state || {};
 
-  // 테스트용 가상 데이터 (나중에 진짜 데이터와 연결하면 돼!)
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const user_id = user.id;
+
   const post = postData
     ? {
+        id: postData.id,
         nickname: postData.nickname,
+        user_id: postData.user_id,
         content: postData.content,
         // Home.jsx에서 보낸 이름이 tags_name이므로 안전하게 매칭
         tags: postData.tags_name || [],
@@ -27,6 +34,23 @@ const Detail = () => {
         imageUrl: "",
         date: "",
       };
+
+  const editButtonClick = async () => {
+    const { data: userCheckData, error: userCheckError } = await supabase
+      .from("diaries")
+      .select("id, profiles(id)")
+      .eq("id", id)
+      .eq("user_id", user_id);
+
+    if (userCheckError) {
+      console.log("유저 데이터를 불러오지 못했습니다.");
+      console.error(userCheckError);
+    } else if (!userCheckData) {
+      alert("게시글을 쓴 사람만 수정할 수 있습니다!");
+    } else {
+      navigate(`/edit/${id}`, { state: { post: post } });
+    }
+  };
 
   return (
     <main className="detail-container">
@@ -81,8 +105,9 @@ const Detail = () => {
 
         {/* 수정 / 삭제 버튼 메뉴 */}
         <div className="post-actions">
-          <button className="action-btn edit-btn">수정</button>
-          <button className="action-btn delete-btn">삭제</button>
+          <button className="action-btn edit-btn" onClick={editButtonClick}>
+            수정
+          </button>
         </div>
       </section>
     </main>
