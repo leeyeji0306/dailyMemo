@@ -1,11 +1,11 @@
 const Card = ({ post }) => {
   return (
     <div className="card">
-      <div className="photo"></div>
+      <img className="photo" src={post.photo_url} />
       <div className="content">
         <p className="detail">{post["content"].slice(0, 50)}</p>
         <div className="tags">
-          {post["tagname"].map((tag, index) => {
+          {post["tags_name"].map((tag, index) => {
             return (
               <span key={index} className="tag">
                 {tag}

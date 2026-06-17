@@ -6,6 +6,8 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const currentPath = location.pathname;
+  const user = JSON.parse(localStorage.getItem("user"));
+  const user_name = user.name;
 
   // 💡 메뉴 바(드롭다운)와 모달창의 열림/닫힘 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +19,6 @@ const Header = () => {
 
   // 💡 로그아웃 '네' 버튼을 눌렀을 때 실행될 함수
   const handleLogoutConfirm = () => {
-
     alert("로그아웃 되었습니다.");
     setIsModalOpen(false); // 모달 닫기
     setIsMenuOpen(false); // 메뉴 바 닫기
@@ -57,10 +58,6 @@ const Header = () => {
             <div>Posting</div>
           </Link>
 
-          <div className="search-box">
-            <input type="text" placeholder="Search in site" />
-          </div>
-
           {/* 💡 프로필 영역 (클릭하면 토글 메뉴 바가 나옵니다) */}
           <div className="profile-wrapper">
             <img
@@ -74,7 +71,7 @@ const Header = () => {
             {isMenuOpen && (
               <div className="profile-dropdown">
                 <div className="dropdown-item user-info-header">
-                  <strong>이예지</strong>님
+                  <strong>{user_name}</strong>님
                 </div>
                 <hr className="dropdown-divider" />
                 <button

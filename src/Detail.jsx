@@ -11,12 +11,22 @@ const Detail = () => {
   const { postData } = location.state || {};
 
   // 테스트용 가상 데이터 (나중에 진짜 데이터와 연결하면 돼!)
-  const post = postData || {
-    nickname: "Not-found",
-    content: "데이터를 불러오지 못했습니다.",
-    tags: [],
-    imageUrl: "", // 이미지가 없을 때를 가정해서 비워둠 (회색 박스로 나옴)
-  };
+  const post = postData
+    ? {
+        nickname: postData.nickname,
+        content: postData.content,
+        // Home.jsx에서 보낸 이름이 tags_name이므로 안전하게 매칭
+        tags: postData.tags_name || [],
+        imageUrl: postData.photo_url,
+        date: postData.date,
+      }
+    : {
+        nickname: "Not-found",
+        content: "데이터를 불러오지 못했습니다.",
+        tags: [],
+        imageUrl: "",
+        date: "",
+      };
 
   return (
     <main className="detail-container">
@@ -59,7 +69,7 @@ const Detail = () => {
 
         {/* 태그 리스트 */}
         <div className="post-tags">
-          {post.tagname.map((tag, index) => (
+          {post["tags"].map((tag, index) => (
             <span key={index} className="post-tag">
               #{tag}
             </span>
