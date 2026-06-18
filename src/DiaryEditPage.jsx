@@ -9,21 +9,18 @@ export default function DiaryEditPage() {
   const navigate = useNavigate();
 
   // 이전 페이지에서 넘어온 원본 데이터 파싱
-  const passedPost = location.state?.post;
-  const diaryId = passedPost?.id; // 수정할 일기의 고유 ID
+  const passedPost = location.state.post;
+  const diaryId = passedPost.id; // 수정할 일기의 고유 ID
 
-  // 세션이나 로컬스토리지에서 현재 로그인한 유저 정보 가져오기
+  // 로컬스토리지에서 현재 로그인한 유저 정보 가져오기
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id;
-
-  // 💡 [수정/삭제 권한 체크 판별기]
-  // 글에 적힌 user_id와 내 로그인 ID가 일치하면 진짜 주인(isOwner = true)
 
   // 초기 상태 설정
   const [content, setContent] = useState(passedPost?.content || "");
 
   // [태그 정제 장치] 넘어온 태그가 쉼표나 배열 형태더라도 input창에는 '#일상 #코딩' 형태로 예쁘게 출력되도록 포맷팅
-  const initialTags = passedPost?.tags
+  const initialTags = passedPost.tags
     ? (Array.isArray(passedPost.tags)
         ? passedPost.tags
         : passedPost.tags
@@ -50,7 +47,7 @@ export default function DiaryEditPage() {
     setImageURL(URL.createObjectURL(file));
   };
 
-  // 💾 [수정하기] 버튼 클릭 핸들러
+  // [수정하기] 버튼 클릭 핸들러
   const handleSave = async () => {
     const postDate = passedPost?.date;
     let finalStorageURL = imageURL;
@@ -150,7 +147,7 @@ export default function DiaryEditPage() {
     navigate("/home");
   };
 
-  // 🗑️ [삭제하기] 실제 동작 핸들러
+  // [삭제하기] 실제 동작 핸들러
   const handleDeleteConfirm = async () => {
     const postDate = passedPost?.date;
 

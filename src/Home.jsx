@@ -5,17 +5,16 @@ import { supabase } from "./supabase";
 import { useEffect, useState } from "react"; // 💡 useState 추가!
 
 const Home = () => {
-  // 💡 1. 데이터를 저장하고 화면을 새로고침해줄 상태(state) 선언
+  // 1. 상태(state) 선언
   const [posts, setPosts] = useState([]);
 
   // 날짜 계산 로직을 컴포넌트 상단에 배치
   let date = new Date();
   let fullDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 
-  // 💡 2. 데이터 로딩 함수를 컴포넌트 내부의 정상적인 위치로 이동
+  // 2. 데이터 로딩 함수를 컴포넌트 내부의 정상적인 위치로 이동
   const postLoading = async () => {
     try {
-      // 💡 쉼표 오타를 완전히 깔끔하게 제거한 Supabase 쿼리!
       const { data: postData, error: postError } = await supabase
         .from("diaries")
         .select(
@@ -56,10 +55,9 @@ const Home = () => {
             continue;
           }
 
-          // 💡 구조 분해 할당 에러 방지를 위한 안전 장치 처리
+          // 구조 분해 할당 에러 방지를 위한 안전 장치 처리
           const nickname = post.profiles ? post.profiles.nickname : "익명";
 
-          // tagsData 구조 안에서 순수한 태그 이름 문자열 배열만 뽑아내는 map 로직 수정
           // tagsData 예시: [{ tags: { name: "일상" } }, { tags: { name: "코딩" } }]
           const tags_name = tagsData
             ? tagsData.map((t) => t.tags && t.tags.name).filter(Boolean)
@@ -76,27 +74,26 @@ const Home = () => {
         }
       }
 
-      // 💡 3. 가공이 끝난 임시 배열을 진짜 상태(State)에 집어넣어 화면을 그리게 만듦!
+      // 3. 가공이 끝난 임시 배열을 진짜 상태(State)에 집어넣어 화면을 그리게 만듦
       setPosts(tempPosts);
     } catch (error) {
       console.error("전체 포스트 로딩 중 오류 발생:", error.message);
     }
   };
 
-  // 💡 4. useEffect는 함수 안이 아니라 이렇게 컴포넌트 최상단에 떡하니 배치해야 함!
+  //4. useEffect는 함수 안이 아니라 이렇게 컴포넌트 최상단에 떡하니 배치해야 함
   useEffect(() => {
     const init = async () => {
       await postLoading();
     };
     init();
-  }, []); // 의존성 배열을 비워두어 컴포넌트가 켜질 때 딱 한 번만 실행되도록 보장!
+  }, []); // 의존성 배열을 비워두어 컴포넌트가 켜질 때 딱 한 번만 실행되도록 보장
 
   return (
     <div>
       <main>
         <h1>Today's Post</h1>
         <div className="card-grid">
-          {/* 💡 posts && posts.map 형태로 안전하게 수정 (기존의 || 문법은 에러를 유발해!) */}
           {posts && posts.length > 0
             ? posts.map((post) => {
                 return (

@@ -7,11 +7,11 @@ const Header = () => {
   const navigate = useNavigate();
   const currentPath = location.pathname;
 
-  // 💡 메뉴 바(드롭다운)와 모달창의 열림/닫힘 상태 관리
+  // 메뉴 바(드롭다운)와 모달창의 열림/닫힘 상태 관리
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 💡 헤더를 숨기고 싶은 페이지들의 경로(Path)를 배열로 등록!
+  // 헤더를 숨기고 싶은 페이지들의 경로(Path)를 배열로 등록!
   const excludePaths = ["/", "/SignUp"];
 
   // 현재 주소가 배열에 포함되어 있다면, 아무것도 렌더링하지 않음(null)
@@ -22,7 +22,7 @@ const Header = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const user_name = user.name;
 
-  // 💡 로그아웃 '네' 버튼을 눌렀을 때 실행될 함수
+  // 로그아웃 '네' 버튼을 눌렀을 때 실행될 함수
   const handleLogoutConfirm = () => {
     alert("로그아웃 되었습니다.");
     setIsModalOpen(false); // 모달 닫기
@@ -63,7 +63,7 @@ const Header = () => {
             <div>Posting</div>
           </Link>
 
-          {/* 💡 프로필 영역 (클릭하면 토글 메뉴 바가 나옵니다) */}
+          {/*프로필 영역 (클릭하면 토글 메뉴 바가 나옵니다) */}
           <div className="profile-wrapper">
             <img
               src="src/assets/프로필.png"
@@ -91,7 +91,7 @@ const Header = () => {
         </nav>
       </header>
 
-      {/* 💡 로그아웃 확인 모달창 */}
+      {/*로그아웃 확인 모달창 */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="logout-modal" onClick={(e) => e.stopPropagation()}>

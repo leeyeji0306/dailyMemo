@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 
 const Explore = () => {
-  // 💡 1. 데이터를 저장하고 화면을 새로고침해줄 상태(state) 선언
+  // 1. 데이터를 저장하고 화면을 새로고침해줄 상태(state) 선언
   const [posts, setPosts] = useState([]);
 
-  // 💡 2. 데이터 로딩 함수를 컴포넌트 내부의 정상적인 위치로 이동
+  // 2. 데이터 로딩 함수를 컴포넌트 내부의 정상적인 위치로 이동
   const postLoading = async () => {
     try {
-      // 💡 쉼표 오타를 완전히 깔끔하게 제거한 Supabase 쿼리!
+      // 쉼표 오타를 완전히 깔끔하게 제거한 Supabase 쿼리
       const { data: postData, error: postError } = await supabase
         .from("diaries")
         .select(
@@ -51,7 +51,7 @@ const Explore = () => {
             continue;
           }
 
-          // 💡 구조 분해 할당 에러 방지를 위한 안전 장치 처리
+          // 구조 분해 할당 에러 방지를 위한 안전 장치 처리
           const nickname = post.profiles ? post.profiles.nickname : "익명";
 
           // tagsData 구조 안에서 순수한 태그 이름 문자열 배열만 뽑아내는 map 로직 수정
@@ -71,14 +71,14 @@ const Explore = () => {
         }
       }
 
-      // 💡 3. 가공이 끝난 임시 배열을 진짜 상태(State)에 집어넣어 화면을 그리게 만듦!
+      // 3. 가공이 끝난 임시 배열을 진짜 상태(State)에 집어넣어 화면을 그리게 만듦!
       setPosts(tempPosts);
     } catch (error) {
       console.error("전체 포스트 로딩 중 오류 발생:", error.message);
     }
   };
 
-  // 💡 4. useEffect는 함수 안이 아니라 이렇게 컴포넌트 최상단에 떡하니 배치해야 함!
+  // 4. useEffect는 함수 안이 아니라 이렇게 컴포넌트 최상단에 떡하니 배치해야 함!
   useEffect(() => {
     const init = async () => {
       await postLoading();

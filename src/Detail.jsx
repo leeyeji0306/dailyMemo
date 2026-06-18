@@ -54,7 +54,6 @@ const Detail = () => {
 
   return (
     <main className="detail-container">
-      {/* 💡 테스트용 ID 확인 (필요 없으면 이 한 줄은 지워도 돼!) */}
       <p
         style={{
           color: "#ccc",

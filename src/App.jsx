@@ -10,7 +10,6 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
-  let userName = "이예지";
   return (
     <>
       <Header />
@@ -19,10 +18,7 @@ export default function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/home" element={<Home />}></Route>
         <Route path="/explore" element={<Explore />}></Route>
-        <Route
-          path="/posting"
-          element={<Posting userName={userName} />}
-        ></Route>
+        <Route path="/posting" element={<Posting />}></Route>
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/edit/:id" element={<DiaryEditPage />} />
       </Routes>

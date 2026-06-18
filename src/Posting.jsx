@@ -4,7 +4,7 @@ import { supabase } from "./supabase";
 
 const Posting = () => {
   const [imageURL, setImageURL] = useState(null); // 브라우저 미리보기용 주소 (blob)
-  const [rawFile, setRawFile] = useState(null); // 💡 Supabase 스토리지에 보낼 진짜 파일 객체
+  const [rawFile, setRawFile] = useState(null); // Supabase 스토리지에 보낼 진짜 파일 객체
   const [content, setContent] = useState("");
   const [tags, setTags] = useState(""); // input value가 문자열이므로 초기값을 ""로 변경
   let user = JSON.parse(localStorage.getItem("user"));
@@ -31,7 +31,7 @@ const Posting = () => {
       return;
     }
 
-    // 💡 공백 태그나 빈 문자열을 걸러내는 작업 (.filter(Boolean) 추가)
+    // 공백 태그나 빈 문자열을 걸러내는 작업 (.filter(Boolean) 추가)
     // 예: "#일기 #일상 #" -> ["일기", "일상"] 깔끔하게 정제됨
     let resultTags = tags
       .split("#")
@@ -156,7 +156,7 @@ const Posting = () => {
 
       const { data: mappingData, error: mappingError } = await supabase
         .from("diary_tags")
-        .insert(mappingRows); // 👈 반복문 돌리지 않고 통째로 주입!
+        .insert(mappingRows); //반복문 돌리지 않고 통째로 주입!
 
       if (mappingError) {
         console.error(
