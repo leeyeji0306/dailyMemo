@@ -44,9 +44,6 @@ export default function DiaryEditPage() {
 
   // 이미지 변경 핸들러
   const handleImageChange = (e) => {
-    // 💡 남의 글이면 사진 클릭해도 반응 없게 막기
-    if (!isOwner) return;
-
     const file = e.target.files[0];
     if (!file) return;
     setRawFile(file);
@@ -55,12 +52,6 @@ export default function DiaryEditPage() {
 
   // 💾 [수정하기] 버튼 클릭 핸들러
   const handleSave = async () => {
-    // 🚨 [보안 잠금] 남의 글이면 수정 요청 차단!
-    if (!isOwner) {
-      alert("본인이 작성한 글만 수정할 수 있습니다. ⛔");
-      return;
-    }
-
     const postDate = passedPost?.date;
     let finalStorageURL = imageURL;
 
@@ -161,13 +152,6 @@ export default function DiaryEditPage() {
 
   // 🗑️ [삭제하기] 실제 동작 핸들러
   const handleDeleteConfirm = async () => {
-    // 🚨 [보안 잠금] 남의 글이면 삭제 요청 차단!
-    if (!isOwner) {
-      alert("본인이 작성한 글만 삭제할 수 있습니다. ⛔");
-      setShowConfirmDiscard(false);
-      return;
-    }
-
     const postDate = passedPost?.date;
 
     try {
@@ -227,15 +211,9 @@ export default function DiaryEditPage() {
               >
                 ←
               </button>
-              <span className="posting-title">
-                {isOwner ? "게시물 수정하기" : "게시물 상세보기"}
-              </span>
+              <span className="posting-title">게시물 수정하기</span>
 
-              <button
-                className="share"
-                onClick={handleSave}
-                style={{ opacity: isOwner ? 1 : 0.5 }}
-              >
+              <button className="share" onClick={handleSave}>
                 수정하기
               </button>
             </div>
@@ -243,11 +221,10 @@ export default function DiaryEditPage() {
               <div className="posting-photo">
                 {imageURL ? (
                   <label
-                    htmlFor={isOwner ? "file-input" : ""} // 💡 내가 쓴 글일 때만 파일 인풋 연결
+                    htmlFor="file-input" // 💡 내가 쓴 글일 때만 파일 인풋 연결
                     className="upload-placeholder"
                     style={{
                       padding: 0,
-                      cursor: isOwner ? "pointer" : "default",
                     }}
                   >
                     <img
@@ -261,10 +238,7 @@ export default function DiaryEditPage() {
                     />
                   </label>
                 ) : (
-                  <label
-                    htmlFor={isOwner ? "file-input" : ""}
-                    className="upload-placeholder"
-                  >
+                  <label htmlFor="file-input" className="upload-placeholder">
                     <span>+</span>
                     <p>사진이 없습니다</p>
                   </label>
@@ -276,7 +250,6 @@ export default function DiaryEditPage() {
                   accept="image/*"
                   onChange={handleImageChange}
                   style={{ display: "none" }}
-                  disabled={!isOwner} // 💡 남의 글이면 파일 선택창 차단
                 />
               </div>
 
@@ -297,7 +270,6 @@ export default function DiaryEditPage() {
                     placeholder="(본문 내용)"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    readOnly={!isOwner} // 💡 남의 글이면 글자 수정 못 하게 읽기 전용 모드 활성화
                   ></textarea>
                 </div>
                 <div className="posting-tags">
@@ -306,7 +278,6 @@ export default function DiaryEditPage() {
                     placeholder="#태그"
                     value={tags}
                     onChange={(e) => setTags(e.target.value)}
-                    readOnly={!isOwner} // 💡 남의 글이면 태그도 수정 불가능
                   />
                 </div>
               </div>
@@ -315,35 +286,33 @@ export default function DiaryEditPage() {
         </div>
 
         {/* 🚨 내가 쓴 글(isOwner === true)일 때만 하단 삭제 구역 렌더링하기 */}
-        {isOwner && (
-          <div
-            className="memo-danger-area"
+        <div
+          className="memo-danger-area"
+          style={{
+            marginTop: "20px",
+            width: "100%",
+            maxWidth: "950px",
+            display: "flex",
+            justifyContent: "flex-end",
+            margin: "20px auto 0",
+          }}
+        >
+          <button
+            className="btn-memo-delete"
+            onClick={() => setShowConfirmDiscard(true)}
             style={{
-              marginTop: "20px",
-              width: "100%",
-              maxWidth: "950px",
-              display: "flex",
-              justifyContent: "flex-end",
-              margin: "20px auto 0",
+              background: "none",
+              border: "1px solid #d94f3a",
+              color: "#d94f3a",
+              padding: "8px 16px",
+              borderRadius: "6px",
+              fontSize: "13px",
+              cursor: "pointer",
             }}
           >
-            <button
-              className="btn-memo-delete"
-              onClick={() => setShowConfirmDiscard(true)}
-              style={{
-                background: "none",
-                border: "1px solid #d94f3a",
-                color: "#d94f3a",
-                padding: "8px 16px",
-                borderRadius: "6px",
-                fontSize: "13px",
-                cursor: "pointer",
-              }}
-            >
-              이 게시물 삭제하기
-            </button>
-          </div>
-        )}
+            이 게시물 삭제하기
+          </button>
+        </div>
       </main>
 
       {/* ⚠️ 삭제 확인 팝업 모달 */}
